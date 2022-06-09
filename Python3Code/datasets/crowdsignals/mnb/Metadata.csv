@@ -1,0 +1,2 @@
+version,device name,recording time,platform,appVersion,device id,sensors,sampleRateMs
+3,SM-G990B,2022-06-08_18-20-14,android,1.8.2,7e4637a8-2ed6-45bb-978d-0acc794872d1,Accelerometer|Gyroscope|Magnetometer|Light|Annotation,10|10|10|0|
