@@ -102,7 +102,7 @@ python3 crowdsignals_ch3_outliers.py --mode='final'
 ```
 Finally, you can run
 ```bash
-python3 crowdsignals_ch3_rest.py --mode='final'
+python3 mnb_crowdsignals_ch3_rest.py --mode='final'
 ```
 to finish Chapter 3.
 
