@@ -24,7 +24,7 @@ from Chapter3.KalmanFilters import KalmanFilters
 # Set up the file names and locations.
 DATA_PATH = Path('./intermediate_datafiles/')
 DATASET_FNAME = 'chapter3_result_outliers.csv'
-RESULT_FNAME = 'chapter3_result_final.csv'
+RESULT_FNAME = 'chapter3_imputation_result_final.csv'
 ORIG_DATASET_FNAME = 'chapter2_result.csv'
 
 def print_flags():
@@ -61,14 +61,15 @@ def main():
     if FLAGS.mode == 'imputation':
         # Let us impute the missing values and plot an example.
        
-        imputed_mean_dataset = MisVal.impute_mean(copy.deepcopy(dataset), 'hr_watch_rate')       
-        imputed_median_dataset = MisVal.impute_median(copy.deepcopy(dataset), 'hr_watch_rate')
-        imputed_interpolation_dataset = MisVal.impute_interpolate(copy.deepcopy(dataset), 'hr_watch_rate')
+        imputed_mean_dataset = MisVal.impute_mean(copy.deepcopy(dataset), 'acc_phone_x')
+        imputed_median_dataset = MisVal.impute_median(copy.deepcopy(dataset), 'acc_phone_x')
+        imputed_interpolation_dataset = MisVal.impute_interpolate(copy.deepcopy(dataset), 'acc_phone_x')
+        #imputed_logictic_regression_dataset = MisVal.impute_linear_regression(copy.deepcopy(dataset),'hr_watch_rate')
         
-        DataViz.plot_imputed_values(dataset, ['original', 'mean', 'median', 'interpolation'], 'hr_watch_rate',
-                                    imputed_mean_dataset['hr_watch_rate'], 
-                                    imputed_median_dataset['hr_watch_rate'],
-                                    imputed_interpolation_dataset['hr_watch_rate'])
+        DataViz.plot_imputed_values(dataset, ['original', 'mean', 'median', 'interpolation'], 'acc_phone_x',
+                                    imputed_mean_dataset['acc_phone_x'],
+                                    imputed_median_dataset['acc_phone_x'],
+                                    imputed_interpolation_dataset['acc_phone_x'])
 
     elif FLAGS.mode == 'kalman':
         # Using the result from Chapter 2, let us try the Kalman filter on the light_phone_lux attribute and study the result.
@@ -139,9 +140,8 @@ def main():
             dataset = MisVal.impute_interpolate(dataset, col)
 
         # And now let us include all LOWPASS measurements that have a form of periodicity (and filter them):
-        periodic_measurements = ['acc_phone_x', 'acc_phone_y', 'acc_phone_z', 'acc_watch_x', 'acc_watch_y', 'acc_watch_z', 'gyr_phone_x', 'gyr_phone_y',
-                                 'gyr_phone_z', 'gyr_watch_x', 'gyr_watch_y', 'gyr_watch_z', 'mag_phone_x', 'mag_phone_y', 'mag_phone_z', 'mag_watch_x',
-                                 'mag_watch_y', 'mag_watch_z']
+        periodic_measurements = ['acc_phone_x', 'acc_phone_y', 'acc_phone_z', 'gyr_phone_x', 'gyr_phone_y',
+                                 'gyr_phone_z',  'mag_phone_x', 'mag_phone_y', 'mag_phone_z']
 
         
         # Let us apply a lowpass filter and reduce the importance of the data above 1.5 Hz
@@ -165,20 +165,20 @@ def main():
         dataset = PCA.apply_pca(copy.deepcopy(dataset), selected_predictor_cols, n_pcs)
 
         # And the overall final dataset:
-        DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'hr_watch_rate', 'light_phone_lux', 'mag_', 'press_phone_', 'pca_', 'label'],
+        DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'light_phone_lux', 'mag_', 'label'],
                              ['like', 'like', 'like', 'like', 'like',
                                  'like', 'like', 'like', 'like'],
                              ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points', 'points'])
 
         # Store the final outcome.
 
-        dataset.to_csv(DATA_PATH / RESULT_FNAME)
+    dataset.to_csv(DATA_PATH / RESULT_FNAME)
 
 
 if __name__ == '__main__':
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='final',
+    parser.add_argument('--mode', type=str, default='imputation',
                         help="Select what version to run: final, imputation, lowpass or PCA \
                         'lowpass' applies the lowpass-filter to a single variable \
                         'imputation' is used for the next chapter \
