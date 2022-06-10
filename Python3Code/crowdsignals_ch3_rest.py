@@ -42,6 +42,7 @@ def main():
     # Next, import the data from the specified location and parse the date index.
     try:
         dataset = pd.read_csv(Path(DATA_PATH / DATASET_FNAME), index_col=0)
+        dataset['ts'] = dataset.index
         dataset.index = pd.to_datetime(dataset.index)
     except IOError as e:
         print('File not found, try to run previous crowdsignals scripts first!')
@@ -64,11 +65,13 @@ def main():
         imputed_mean_dataset = MisVal.impute_mean(copy.deepcopy(dataset), 'hr_watch_rate')       
         imputed_median_dataset = MisVal.impute_median(copy.deepcopy(dataset), 'hr_watch_rate')
         imputed_interpolation_dataset = MisVal.impute_interpolate(copy.deepcopy(dataset), 'hr_watch_rate')
-        
-        DataViz.plot_imputed_values(dataset, ['original', 'mean', 'median', 'interpolation'], 'hr_watch_rate',
-                                    imputed_mean_dataset['hr_watch_rate'], 
+        imputed_model_based_dataset = MisVal.impute_knn(copy.deepcopy(dataset), 'hr_watch_rate')
+
+        DataViz.plot_imputed_values(dataset, ['original', 'mean', 'median', 'interpolation', 'KNN'], 'hr_watch_rate',
+                                    imputed_mean_dataset['hr_watch_rate'],
                                     imputed_median_dataset['hr_watch_rate'],
-                                    imputed_interpolation_dataset['hr_watch_rate'])
+                                    imputed_interpolation_dataset['hr_watch_rate'],
+                                    imputed_model_based_dataset['hr_watch_rate'])
 
     elif FLAGS.mode == 'kalman':
         # Using the result from Chapter 2, let us try the Kalman filter on the light_phone_lux attribute and study the result.
@@ -178,7 +181,7 @@ def main():
 if __name__ == '__main__':
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='final',
+    parser.add_argument('--mode', type=str, default='imputation',
                         help="Select what version to run: final, imputation, lowpass or PCA \
                         'lowpass' applies the lowpass-filter to a single variable \
                         'imputation' is used for the next chapter \

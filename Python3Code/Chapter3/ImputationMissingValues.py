@@ -11,7 +11,10 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-
+from sklearn.impute import KNNImputer
+from numpy import isnan
+import numpy as np
+from dateutil import parser
 
 class ImputationMissingValues:
 
@@ -34,6 +37,7 @@ class ImputationMissingValues:
 
     # Linear regression to predict missing values
     def impute_linear_regression(self,dataset,col):
+
         features_dataset = dataset[dataset[col].notna() == True]
 
         print(dataset[dataset[col].notna() == True])
@@ -61,4 +65,20 @@ class ImputationMissingValues:
         predictions_series = pd.Series(predictions)
 
         dataset.loc[dataset[col].isnull(), col] = predictions
+        return dataset
+
+    def impute_knn(self, dataset, col):
+        dataset['ts'] = dataset['ts'].apply(lambda x: pd.to_datetime(x).timestamp())
+
+        data = dataset[['ts', col]].to_numpy()
+        # print total missing
+        # define imputer
+        imputer = KNNImputer(n_neighbors=5, weights='uniform', metric='nan_euclidean')
+        # fit on the dataset
+        imputer.fit(data)
+        # transform the dataset
+        dataTrans = imputer.transform(data)
+        # print total missing
+
+        dataset[col] = dataTrans[:,1]
         return dataset
