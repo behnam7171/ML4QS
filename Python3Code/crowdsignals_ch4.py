@@ -21,9 +21,9 @@ from Chapter4.FrequencyAbstraction import FourierTransformation
 from Chapter4.TextAbstraction import TextAbstraction
 
 # Read the result from the previous chapter, and make sure the index is of the type datetime.
-DATA_PATH = Path('./intermediate_datafiles/')
-DATASET_FNAME = 'chapter3_result_final.csv'
-RESULT_FNAME = 'chapter4_result.csv'
+DATA_PATH = Path('./mnb_intermediate_datafiles/')
+DATASET_FNAME = 'mnb_chapter3_result_final.csv'
+RESULT_FNAME = 'mnb_chapter4_result.csv'
 
 def print_flags():
     """
@@ -60,7 +60,8 @@ def main():
         # Chapter 4: Identifying aggregate attributes.
 
         # Set the window sizes to the number of instances representing 5 seconds, 30 seconds and 5 minutes
-        window_sizes = [int(float(5000)/milliseconds_per_instance), int(float(0.5*60000)/milliseconds_per_instance), int(float(5*60000)/milliseconds_per_instance)]
+        #window_sizes = [int(float(5000)/milliseconds_per_instance), int(float(0.5*60000)/milliseconds_per_instance), int(float(5*60000)/milliseconds_per_instance)]
+        window_sizes = [int(float(0.5*60000)/milliseconds_per_instance)]
 
          #please look in Chapter4 TemporalAbstraction.py to look for more aggregation methods or make your own.     
         
@@ -74,7 +75,8 @@ def main():
   
     if FLAGS.mode == 'frequency':
         # Now we move to the frequency domain, with the same window size.
-       
+
+       # TODO : Play with these parameter for Chapter 4 Question 3
         fs = float(1000)/milliseconds_per_instance
         ws = int(float(10000)/milliseconds_per_instance)
         dataset = FreqAbs.abstract_frequency(dataset, ['acc_phone_x'], ws, fs)
@@ -83,7 +85,6 @@ def main():
         print("--- %s seconds ---" % (time.time() - start_time))
   
     if FLAGS.mode == 'final':
-        
 
         ws = int(float(0.5*60000)/milliseconds_per_instance)
         fs = float(1000)/milliseconds_per_instance
@@ -98,7 +99,7 @@ def main():
         #                     ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'],
         #                     ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points'])
 
-        DataViz.plot_dataset(dataset, ['hr_watch_rate','label'],['like','like'],['line','line'])
+        DataViz.plot_dataset(dataset, ['acc_phone_x','label'],['like','like'],['line','line'])
      
         CatAbs = CategoricalAbstraction()
         
@@ -127,16 +128,16 @@ def main():
         dataset.to_csv(DATA_PATH / RESULT_FNAME)
 
         #DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'hr_watch_rate', 'light_phone_lux', 'mag_phone_x', 'press_phone_', 'pca_1', 'label'], ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'], ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points'])
-        DataViz.plot_dataset(dataset, ['hr_watch_rate','label'],
+        DataViz.plot_dataset(dataset, ['acc_phone_x','label'],
                              ['like','like'],
-                             ['line','line'])
+                             ['line','points'])
 
         print("--- %s seconds ---" % (time.time() - start_time))
   
 if __name__ == '__main__':
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='final',
+    parser.add_argument('--mode', type=str, default='frequency',
                         help= "Select what version to run: final, aggregation or freq \
                         'aggregation' studies the effect of several aggeregation methods \
                         'frequency' applies a Fast Fourier transformation to a single variable \
