@@ -94,8 +94,11 @@ def main():
         dataset = NumAbs.abstract_numerical(dataset, selected_predictor_cols, ws, 'std')
         # TODO: Add your own aggregation methods here
         
-        DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'hr_watch_rate', 'light_phone_lux', 'mag_phone_x', 'press_phone_', 'pca_1', 'label'], ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'], ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points'])
+        #DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'hr_watch_rate', 'light_phone_lux', 'mag_phone_x', 'press_phone_', 'pca_1', 'label'],
+        #                     ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'],
+        #                     ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points'])
 
+        DataViz.plot_dataset(dataset, ['hr_watch_rate','label'],['like','like'],['line','line'])
      
         CatAbs = CategoricalAbstraction()
         
@@ -123,7 +126,11 @@ def main():
 
         dataset.to_csv(DATA_PATH / RESULT_FNAME)
 
-        DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'hr_watch_rate', 'light_phone_lux', 'mag_phone_x', 'press_phone_', 'pca_1', 'label'], ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'], ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points'])
+        #DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'hr_watch_rate', 'light_phone_lux', 'mag_phone_x', 'press_phone_', 'pca_1', 'label'], ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'], ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points'])
+        DataViz.plot_dataset(dataset, ['hr_watch_rate','label'],
+                             ['like','like'],
+                             ['line','line'])
+
         print("--- %s seconds ---" % (time.time() - start_time))
   
 if __name__ == '__main__':
