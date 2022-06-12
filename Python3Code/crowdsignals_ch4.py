@@ -21,9 +21,9 @@ from Chapter4.FrequencyAbstraction import FourierTransformation
 from Chapter4.TextAbstraction import TextAbstraction
 
 # Read the result from the previous chapter, and make sure the index is of the type datetime.
-DATA_PATH = Path('./mnb_intermediate_datafiles/')
-DATASET_FNAME = 'mnb_chapter3_result_final.csv'
-RESULT_FNAME = 'mnb_chapter4_result.csv'
+DATA_PATH = Path('./intermediate_datafiles/')
+DATASET_FNAME = 'chapter3_result_final.csv'
+RESULT_FNAME = 'chapter4_result.csv'
 
 def print_flags():
     """
@@ -78,10 +78,17 @@ def main():
 
        # TODO : Play with these parameter for Chapter 4 Question 3
         fs = float(1000)/milliseconds_per_instance
-        ws = int(float(10000)/milliseconds_per_instance)
+        #ws = int(float(10000)/milliseconds_per_instance)
+        ws = 40
         dataset = FreqAbs.abstract_frequency(dataset, ['acc_phone_x'], ws, fs)
         # Spectral analysis.
-        DataViz.plot_dataset(dataset, ['acc_phone_x_max_freq', 'acc_phone_x_freq_weighted', 'acc_phone_x_pse', 'label'], ['like', 'like', 'like', 'like'], ['line', 'line', 'line','points'])
+        #DataViz.plot_dataset(dataset, ['mag_phone_x_max_freq', 'mag_phone_x_freq_weighted', 'mag_phone_x_pse', 'label'],
+        #                     ['like', 'like', 'like', 'like'],
+        #                     ['line', 'line', 'line','points'])
+        DataViz.plot_dataset(dataset, ['acc_phone_x_freq_0.1_Hz_ws_40','acc_phone_x_freq_1.0_Hz_ws_40','acc_phone_x_freq_1.7_Hz_ws_40','acc_phone_x_freq_2.0_Hz_ws_40','label'],
+                             ['like','like','like','like','like'],
+                             ['line','line','line','line','points'])
+
         print("--- %s seconds ---" % (time.time() - start_time))
   
     if FLAGS.mode == 'final':
