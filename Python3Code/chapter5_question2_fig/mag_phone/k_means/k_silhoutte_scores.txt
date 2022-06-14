@@ -1,0 +1,16 @@
+k = 2
+silhouette = 0.5496638458366405
+k = 3
+silhouette = 0.5827570663458449
+k = 4
+silhouette = 0.5896598398792922
+k = 5
+silhouette = 0.6167351551217837
+k = 6
+silhouette = 0.5659513384557784
+k = 7
+silhouette = 0.6036383777358637
+k = 8
+silhouette = 0.6103623827381373
+k = 9
+silhouette = 0.6058204213207876

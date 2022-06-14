@@ -1,0 +1,19 @@
+===== kmeans clustering =====
+k = 2
+silhouette = 0.7211568192558407
+k = 3
+silhouette = 0.6981718063253283
+k = 4
+silhouette = 0.6603504553460683
+k = 5
+silhouette = 0.5224841685069465
+k = 6
+silhouette = 0.5472860836936563
+k = 7
+silhouette = 0.5261708050435073
+k = 8
+silhouette = 0.5209513087267067
+k = 9
+silhouette = 0.5386729101296058
+
+Highest K-Means silhouette score: k = 2

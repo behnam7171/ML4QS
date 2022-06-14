@@ -1,0 +1,19 @@
+===== k medoids clustering =====
+k = 2
+silhouette = 0.5331989417127948
+k = 3
+silhouette = 0.4381877454755543
+k = 4
+silhouette = 0.47400485651610724
+k = 5
+silhouette = 0.48575358958488635
+k = 6
+silhouette = 0.47750321070108315
+k = 7
+silhouette = 0.4202457096462721
+k = 8
+silhouette = 0.46061549354805437
+k = 9
+silhouette = 0.4337900761821559
+
+Highest K-Medoids silhouette score: k = 2

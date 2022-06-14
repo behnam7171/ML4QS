@@ -1,0 +1,20 @@
+k = 2
+silhouette = 0.549266578668809
+k = 3
+silhouette = 0.5829570836380559
+k = 4
+silhouette = 0.5827113543115093
+k = 5
+silhouette = 0.6084484495929401
+k = 6
+silhouette = 0.570284382572518
+k = 7
+silhouette = 0.5721668138241893
+k = 8
+silhouette = 0.5964462633715816
+k = 9
+
+silhouette = 0.5787602605188487
+
+Max score:  0.6084484495929401
+Max k =  5

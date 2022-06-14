@@ -1,0 +1,16 @@
+Attribute , Statistic, Cluster1, Cluster2, Cluster3, Cluster4, Cluster5
+
+mag_phone_x  & mean  &  -2.15 &  -15.36 &  17.19 &  -21.89 &  -11.14\\
+ 	     & std  &  14.56 &  8.40 &  8.64 &  6.65 &  7.34\\
+
+mag_phone_y  & mean  &  4.23 &  41.27 &  41.01 &  13.40 &  -21.42\\
+ 	     & std  &  8.15 &  5.43 &  4.79 &  5.05 &  3.86\\
+
+mag_phone_z & mean  &  -40.69 &  -0.81 &  0.21 &  30.95 &  -17.80\\
+ 	    & std  &  6.36 &  7.19 &  6.37 &  7.94 &  5.48\\
+
+labelWalking  & percentage  &  22.73 \% &  46.36 \% &  28.18 \% &  0.91 \% &  1.82 \%\\
+labelSitting  & percentage  &  21.31 \% &  11.48 \% &  0.82 \% &  65.57 \% &  0.82 \%\\
+labelRunning  & percentage  &  4.55 \% &  22.73 \% &  72.73 \% &  0.00 \% &  0.00 \%\\
+labelOnthetable  & percentage  &  2.59 \% &  7.76 \% &  0.00 \% &  0.00 \% &  89.66 \%\\
+labelCycling  & percentage  &  1.54 \% &  86.92 \% &  0.77 \% &  5.38 \% &  5.38 \%\\

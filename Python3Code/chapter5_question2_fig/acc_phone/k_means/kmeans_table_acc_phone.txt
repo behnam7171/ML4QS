@@ -1,0 +1,11 @@
+\multirow{2}{*}{ acc_phone_x } & mean  &  -0.07 &  1.80\\
+ & std  &  1.80 &  3.42\\
+\multirow{2}{*}{ acc_phone_y } & mean  &  0.16 &  -10.72\\
+ & std  &  2.35 &  6.14\\
+\multirow{2}{*}{ acc_phone_z } & mean  &  0.01 &  0.18\\
+ & std  &  0.85 &  1.76\\
+labelWalking  & percentage  &  100.00 \% &  0.00 \%\\
+labelSitting  & percentage  &  100.00 \% &  0.00 \%\\
+labelRunning  & percentage  &  74.55 \% &  25.45 \%\\
+labelOnthetable  & percentage  &  100.00 \% &  0.00 \%\\
+labelCycling  & percentage  &  96.92 \% &  3.08 \%\\

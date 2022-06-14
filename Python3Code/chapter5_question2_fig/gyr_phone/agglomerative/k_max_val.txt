@@ -1,0 +1,20 @@
+===== agglomerative clustering =====
+k = 2
+silhouette = 0.6440256862029039
+k = 3
+silhouette = 0.37944504163619136
+k = 4
+silhouette = 0.41256523886018404
+k = 5
+silhouette = 0.4360816001875229
+k = 6
+silhouette = 0.4387832766778436
+k = 7
+silhouette = 0.4457820372208363
+k = 8
+silhouette = 0.4671630293067234
+k = 9
+silhouette = 0.4544456831378539
+
+Max score:  0.6440256862029039
+Max k =  2
