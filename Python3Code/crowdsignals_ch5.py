@@ -27,9 +27,9 @@ import argparse
 def main():
 
     # As usual, we set our program constants, read the input file and initialize a visualization object.
-    DATA_PATH = Path('./intermediate_datafiles/')
-    DATASET_FNAME = 'chapter4_result.csv'
-    RESULT_FNAME = 'chapter5_result.csv'
+    DATA_PATH = Path('./mnb_intermediate_datafiles/')
+    DATASET_FNAME = 'mnb_chapter4_result.csv'
+    RESULT_FNAME = 'mnb_chapter5_result.csv'
 
     try:
         dataset = pd.read_csv(DATA_PATH / DATASET_FNAME, index_col=0)
@@ -150,7 +150,7 @@ def main():
 if __name__ == '__main__':
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='agglomerative',
+    parser.add_argument('--mode', type=str, default='final',
                         help="Select what version to run: final, kmeans, kmediods, hierarchical or aggloromative. \
                         'kmeans' to study the effect of kmeans on a selection of variables \
                         'kmediods' to study the effect of kmediods on a selection of variables \
