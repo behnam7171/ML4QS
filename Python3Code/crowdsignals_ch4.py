@@ -78,8 +78,7 @@ def main():
 
        # TODO : Play with these parameter for Chapter 4 Question 3
         fs = float(1000)/milliseconds_per_instance
-        #ws = int(float(10000)/milliseconds_per_instance)
-        ws = 240
+        ws = int(float(10000)/milliseconds_per_instance)
         dataset = FreqAbs.abstract_frequency(dataset, ['acc_phone_x'], ws, fs)
         # Spectral analysis.
         #DataViz.plot_dataset(dataset, ['mag_phone_x_max_freq', 'mag_phone_x_freq_weighted', 'mag_phone_x_pse', 'label'],
@@ -144,7 +143,7 @@ def main():
 if __name__ == '__main__':
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='frequency',
+    parser.add_argument('--mode', type=str, default='final',
                         help= "Select what version to run: final, aggregation or freq \
                         'aggregation' studies the effect of several aggeregation methods \
                         'frequency' applies a Fast Fourier transformation to a single variable \
