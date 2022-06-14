@@ -27,9 +27,9 @@ import argparse
 def main():
 
     # As usual, we set our program constants, read the input file and initialize a visualization object.
-    DATA_PATH = Path('./mnb_intermediate_datafiles/')
-    DATASET_FNAME = 'mnb_chapter4_result.csv'
-    RESULT_FNAME = 'mnb_chapter5_result.csv'
+    DATA_PATH = Path('./intermediate_datafiles/')
+    DATASET_FNAME = 'chapter4_result.csv'
+    RESULT_FNAME = 'chapter5_result.csv'
 
     try:
         dataset = pd.read_csv(DATA_PATH / DATASET_FNAME, index_col=0)
@@ -105,6 +105,8 @@ def main():
 
         k_values = range(2, 10)
         silhouette_values = []
+        k_datasets = []
+        k_ls = []
 
         # Do some initial runs to determine the right number for the maximum number of clusters.
 
@@ -116,8 +118,16 @@ def main():
             silhouette_score = dataset['silhouette'].mean()
             print(f'silhouette = {silhouette_score}')
             silhouette_values.append(silhouette_score)
-            if k == k_values[0]:
-                DataViz.plot_dendrogram(dataset, l)
+
+            k_datasets.append(dataset)
+            k_ls.append(l)
+
+        max_value = np.max(silhouette_values)
+        index_max = silhouette_values.index(max_value)
+
+        print('max score = ', max_value)
+        print('max k = ', k_values[index_max])
+        DataViz.plot_dendrogram(k_datasets[index_max], k_ls[index_max])
 
         DataViz.plot_xy(x=[k_values], y=[silhouette_values], xlabel='k', ylabel='silhouette score',
                         ylim=[0, 1], line_styles=['b-'])
@@ -140,7 +150,7 @@ def main():
 if __name__ == '__main__':
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='kmeans',
+    parser.add_argument('--mode', type=str, default='final',
                         help="Select what version to run: final, kmeans, kmediods, hierarchical or aggloromative. \
                         'kmeans' to study the effect of kmeans on a selection of variables \
                         'kmediods' to study the effect of kmediods on a selection of variables \
