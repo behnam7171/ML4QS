@@ -21,9 +21,9 @@ from Chapter4.FrequencyAbstraction import FourierTransformation
 from Chapter4.TextAbstraction import TextAbstraction
 
 # Read the result from the previous chapter, and make sure the index is of the type datetime.
-DATA_PATH = Path('./intermediate_datafiles/')
-DATASET_FNAME = 'chapter3_result_final.csv'
-RESULT_FNAME = 'chapter4_result.csv'
+DATA_PATH = Path('./mnb_intermediate_datafiles/')
+DATASET_FNAME = 'mnb_chapter3_result_final.csv'
+RESULT_FNAME = 'mnb_chapter4_result.csv'
 
 def print_flags():
     """
@@ -101,22 +101,19 @@ def main():
         dataset = NumAbs.abstract_numerical(dataset, selected_predictor_cols, ws, 'std')
         # TODO: Add your own aggregation methods here
         
-        #DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'hr_watch_rate', 'light_phone_lux', 'mag_phone_x', 'press_phone_', 'pca_1', 'label'],
-        #                     ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'],
-        #                     ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points'])
+        DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'light_phone_lux', 'mag_phone_x', 'pca_1', 'label'],
+                            ['like', 'like', 'like', 'like', 'like','like'],
+                             ['line', 'line','line', 'line', 'line', 'points'])
 
-        DataViz.plot_dataset(dataset, ['acc_phone_x','label'],['like','like'],['line','line'])
+        #DataViz.plot_dataset(dataset, ['acc_phone_x','label'],['like','like'],['line','line'])
      
         CatAbs = CategoricalAbstraction()
         
         dataset = CatAbs.abstract_categorical(dataset, ['label'], ['like'], 0.03, int(float(5*60000)/milliseconds_per_instance), 2)
 
 
-        periodic_predictor_cols = ['acc_phone_x'
-                                    ,'acc_phone_y','acc_phone_z',
-                                    'acc_watch_x','acc_watch_y','acc_watch_z','gyr_phone_x','gyr_phone_y',
-                                'gyr_phone_z','gyr_watch_x','gyr_watch_y','gyr_watch_z','mag_phone_x','mag_phone_y','mag_phone_z',
-                                'mag_watch_x','mag_watch_y','mag_watch_z']
+        periodic_predictor_cols = ['acc_phone_x','acc_phone_y','acc_phone_z','gyr_phone_x','gyr_phone_y',
+                                'gyr_phone_z','mag_phone_x','mag_phone_y','mag_phone_z']
 
 
         
@@ -133,10 +130,10 @@ def main():
 
         dataset.to_csv(DATA_PATH / RESULT_FNAME)
 
-        #DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'hr_watch_rate', 'light_phone_lux', 'mag_phone_x', 'press_phone_', 'pca_1', 'label'], ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'], ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points'])
-        DataViz.plot_dataset(dataset, ['acc_phone_x','label'],
-                             ['like','like'],
-                             ['line','points'])
+        DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'light_phone_lux', 'mag_phone_x', 'pca_1', 'label'],
+                             ['like', 'like', 'like', 'like', 'like','like'],
+                             ['line', 'line', 'line', 'line', 'line', 'points'])
+        #DataViz.plot_dataset(dataset, ['acc_phone_x','label'],['like','like'],['line','points'])
 
         print("--- %s seconds ---" % (time.time() - start_time))
   
