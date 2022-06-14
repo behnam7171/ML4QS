@@ -27,9 +27,9 @@ import argparse
 def main():
 
     # As usual, we set our program constants, read the input file and initialize a visualization object.
-    DATA_PATH = Path('./mnb_intermediate_datafiles/')
-    DATASET_FNAME = 'mnb_chapter4_result.csv'
-    RESULT_FNAME = 'mnb_chapter5_result.csv'
+    DATA_PATH = Path('./intermediate_datafiles/')
+    DATASET_FNAME = 'chapter4_result.csv'
+    RESULT_FNAME = 'chapter5_result.csv'
 
     try:
         dataset = pd.read_csv(DATA_PATH / DATASET_FNAME, index_col=0)
@@ -54,7 +54,7 @@ def main():
         for k in k_values:
             print(f'k = {k}')
             dataset_cluster = clusteringNH.k_means_over_instances(copy.deepcopy(
-                dataset), ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], k, 'default', 20, 10)
+                dataset), ['gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], k, 'default', 20, 10)
             silhouette_score = dataset_cluster['silhouette'].mean()
             print(f'silhouette = {silhouette_score}')
             silhouette_values.append(silhouette_score)
@@ -78,7 +78,7 @@ def main():
         for k in k_values:
             print(f'k = {k}')
             dataset_cluster = clusteringNH.k_medoids_over_instances(copy.deepcopy(
-                dataset), ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], k, 'default', 20, n_inits=10)
+                dataset), ['gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], k, 'default', 20, n_inits=10)
             silhouette_score = dataset_cluster['silhouette'].mean()
             print(f'silhouette = {silhouette_score}')
             silhouette_values.append(silhouette_score)
@@ -93,12 +93,12 @@ def main():
         print(f'Highest K-Medoids silhouette score: k = {k}')
 
         dataset_kmed = clusteringNH.k_medoids_over_instances(copy.deepcopy(dataset), [
-                                                             'acc_phone_x', 'acc_phone_y', 'acc_phone_z'], k, 'default', 20, n_inits=50)
+                                                             'gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], k, 'default', 20, n_inits=50)
         DataViz.plot_clusters_3d(dataset_kmed, [
-                                 'acc_phone_x', 'acc_phone_y', 'acc_phone_z'], 'cluster', ['label'])
+                                 'gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], 'cluster', ['label'])
         DataViz.plot_silhouette(dataset_kmed, 'cluster', 'silhouette')
         util.print_latex_statistics_clusters(dataset_kmed, 'cluster', [
-                                             'acc_phone_x', 'acc_phone_y', 'acc_phone_z'], 'label')
+                                             'gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], 'label')
 
     # And the hierarchical clustering is the last one we try
     if FLAGS.mode == 'agglomerative':
@@ -114,7 +114,7 @@ def main():
         for k in k_values:
             print(f'k = {k}')
             dataset, l = clusteringH.agglomerative_over_instances(dataset, [
-                                                                          'acc_phone_x', 'acc_phone_y', 'acc_phone_z'], k, 'euclidean', use_prev_linkage=True, link_function='ward')
+                                                                          'gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], k, 'euclidean', use_prev_linkage=True, link_function='ward')
             silhouette_score = dataset['silhouette'].mean()
             print(f'silhouette = {silhouette_score}')
             silhouette_values.append(silhouette_score)
@@ -137,11 +137,11 @@ def main():
         # And we select the outcome dataset of the knn clustering....
         clusteringNH = NonHierarchicalClustering()
 
-        dataset = clusteringNH.k_means_over_instances(dataset, ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], FLAGS.k, 'default', 50, 50)
-        DataViz.plot_clusters_3d(dataset, ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], 'cluster', ['label'])
+        dataset = clusteringNH.k_means_over_instances(dataset, ['gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], FLAGS.k, 'default', 50, 50)
+        DataViz.plot_clusters_3d(dataset, ['gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], 'cluster', ['label'])
         DataViz.plot_silhouette(dataset, 'cluster', 'silhouette')
         util.print_latex_statistics_clusters(
-            dataset, 'cluster', ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], 'label')
+            dataset, 'cluster', ['gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], 'label')
         del dataset['silhouette']
 
         dataset.to_csv(DATA_PATH / RESULT_FNAME)
@@ -150,7 +150,7 @@ def main():
 if __name__ == '__main__':
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='final',
+    parser.add_argument('--mode', type=str, default='agglomerative',
                         help="Select what version to run: final, kmeans, kmediods, hierarchical or aggloromative. \
                         'kmeans' to study the effect of kmeans on a selection of variables \
                         'kmediods' to study the effect of kmediods on a selection of variables \
