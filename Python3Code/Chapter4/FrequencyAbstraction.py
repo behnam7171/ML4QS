@@ -60,9 +60,9 @@ class FourierTransformation:
         for col in columns:
             collist = []
             # prepare column names
-            collist.append(col + '_max_freq')
-            collist.append(col + '_freq_weighted')
             collist.append(col + '_pse')
+            collist.append(col + '_freq_weighted')
+            collist.append(col + '_max_freq')
             
             collist = collist + [col + '_freq_' +
                     str(freq) + '_Hz_ws_' + str(window_size) for freq in self.freqs]
