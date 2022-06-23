@@ -117,7 +117,7 @@ def main():
             dataset.loc[dataset[f'{col}_outlier'] == True, col] = np.nan
             del dataset[col + '_outlier']
 
-        dataset.to_csv(DATA_PATH / RESULT_FNAME)
+    dataset.to_csv(DATA_PATH / RESULT_FNAME)
 
 
 if __name__ == '__main__':
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
 
-    parser.add_argument('--mode', type=str, default='LOF',
+    parser.add_argument('--mode', type=str, default='distance',
                         help="Select what version to run: LOF, distance, mixture, chauvenet or final \
                         'LOF' applies the Local Outlier Factor to a single variable \
                         'distance' applies a distance based outlier detection method to a single variable \
