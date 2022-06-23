@@ -1,0 +1,21 @@
+Feature importance decision tree:
+gyr_phone_x_temp_std_ws_120 & 0.536239648154776
+acc_phone_y_freq_0.0_Hz_ws_40 & 0.18666057755961082
+mag_phone_z_max_freq & 0.15146060536332118
+acc_phone_x_freq_1.9_Hz_ws_40 & 0.03835201293253379
+acc_phone_y_freq_0.5_Hz_ws_40 & 0.03557285507956523
+mag_phone_y_pse & 0.02205242378436239
+mag_phone_z_freq_0.9_Hz_ws_40 & 0.021066498140727925
+gyr_phone_y_freq_1.0_Hz_ws_40 & 0.007226638870146085
+gyr_phone_y_freq_weighted & 0.0013687401149565183
+{'criterion': 'entropy', 'min_samples_leaf': 2, 'n_estimators': 100}
+Feature importance random forest:
+gyr_phone_x_temp_std_ws_120 & 0.34364855686738927
+acc_phone_y_freq_0.0_Hz_ws_40 & 0.1707303635816778
+mag_phone_z_max_freq & 0.11906873393917358
+mag_phone_y_pse & 0.10984762040260126
+acc_phone_x_freq_1.9_Hz_ws_40 & 0.07922706296691234
+acc_phone_y_freq_0.5_Hz_ws_40 & 0.07664536786671255
+gyr_phone_y_freq_1.0_Hz_ws_40 & 0.0501405946302987
+mag_phone_z_freq_0.9_Hz_ws_40 & 0.02779221011475306
+gyr_phone_y_freq_weighted & 0.02289948963048146
