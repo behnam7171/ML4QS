@@ -12,7 +12,7 @@ def get_chapter(module_path):
 def normalize_dataset(data_table, columns):
     dt_norm = copy.deepcopy(data_table)
     for col in columns:
-        dt_norm[col] = (data_table[col] - data_table[col].mean()) / (data_table[col].max() - data_table[col].min())
+        dt_norm[col] = np.subtract(data_table[col], data_table[col].mean(), dtype=np.float32) / np.subtract(data_table[col].max(), data_table[col].min(), dtype=np.float32)
     return dt_norm
 
 # Calculate the distance between rows.
