@@ -22,9 +22,9 @@ from Chapter3.ImputationMissingValues import ImputationMissingValues
 from Chapter3.KalmanFilters import KalmanFilters
 
 # Set up the file names and locations.
-DATA_PATH = Path('./intermediate_datafiles/')
-DATASET_FNAME = 'chapter3_result_outliers.csv'
-RESULT_FNAME = 'chapter3_result_final.csv'
+DATA_PATH = Path('./mnb_intermediate_datafiles/')
+DATASET_FNAME = 'mnb_chapter3_result_outliers.csv'
+RESULT_FNAME = 'mnb_chapter3_result_final.csv'
 ORIG_DATASET_FNAME = 'chapter2_result.csv'
 
 def print_flags():
@@ -42,7 +42,6 @@ def main():
     # Next, import the data from the specified location and parse the date index.
     try:
         dataset = pd.read_csv(Path(DATA_PATH / DATASET_FNAME), index_col=0)
-        dataset['ts'] = dataset.index
         dataset.index = pd.to_datetime(dataset.index)
     except IOError as e:
         print('File not found, try to run previous crowdsignals scripts first!')
@@ -142,9 +141,8 @@ def main():
             dataset = MisVal.impute_interpolate(dataset, col)
 
         # And now let us include all LOWPASS measurements that have a form of periodicity (and filter them):
-        periodic_measurements = ['acc_phone_x', 'acc_phone_y', 'acc_phone_z', 'acc_watch_x', 'acc_watch_y', 'acc_watch_z', 'gyr_phone_x', 'gyr_phone_y',
-                                 'gyr_phone_z', 'gyr_watch_x', 'gyr_watch_y', 'gyr_watch_z', 'mag_phone_x', 'mag_phone_y', 'mag_phone_z', 'mag_watch_x',
-                                 'mag_watch_y', 'mag_watch_z']
+        periodic_measurements = ['acc_phone_x', 'acc_phone_y', 'acc_phone_z', 'gyr_phone_x', 'gyr_phone_y',
+                                 'gyr_phone_z', 'mag_phone_x', 'mag_phone_y', 'mag_phone_z', 'grav_phone_x', 'grav_phone_y', 'grav_phone_z']
 
         
         # Let us apply a lowpass filter and reduce the importance of the data above 1.5 Hz
@@ -168,10 +166,10 @@ def main():
         dataset = PCA.apply_pca(copy.deepcopy(dataset), selected_predictor_cols, n_pcs)
 
         # And the overall final dataset:
-        DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'hr_watch_rate', 'light_phone_lux', 'mag_', 'press_phone_', 'pca_', 'label'],
+        DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'light_phone_lux', 'mag_', 'grav_', 'pca_', 'label'],
                              ['like', 'like', 'like', 'like', 'like',
-                                 'like', 'like', 'like', 'like'],
-                             ['line', 'line', 'line', 'line', 'line', 'line', 'line', 'points', 'points'])
+                                 'like', 'like', 'like'],
+                             ['line', 'line', 'line', 'line', 'line', 'points', 'points'])
 
         # Store the final outcome.
 
@@ -181,7 +179,7 @@ def main():
 if __name__ == '__main__':
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='imputation',
+    parser.add_argument('--mode', type=str, default='final',
                         help="Select what version to run: final, imputation, lowpass or PCA \
                         'lowpass' applies the lowpass-filter to a single variable \
                         'imputation' is used for the next chapter \

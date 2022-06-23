@@ -64,6 +64,8 @@ for milliseconds_per_instance in GRANULARITIES:
 
     # We add the pressure sensed by the phone (continuous numerical measurements) and aggregate by averaging again
     # Get the resulting pandas data table
+    dataset.add_numerical_dataset('Gravity.csv', 'timestamps', ['x','y','z'], 'avg', 'grav_phone_')
+
     dataset = dataset.data_table
 
     print(dataset)
@@ -75,9 +77,9 @@ for milliseconds_per_instance in GRANULARITIES:
     DataViz.plot_dataset_boxplot(dataset, ['acc_phone_x','acc_phone_y','acc_phone_z'])
 
     # Plot all data
-    DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'light_phone_lux', 'mag_', 'label'],
-                                  ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'],
-                                  ['line', 'line', 'line', 'line', 'line', 'line', 'points', 'points'])
+    DataViz.plot_dataset(dataset, ['acc_', 'grav_', 'gyr_', 'light_phone_lux', 'mag_', 'label'],
+                                  ['like', 'like', 'like', 'like', 'like','like'],
+                                  ['line', 'line', 'line', 'line', 'points', 'points'])
 
     # And print a summary of the dataset.
     util.print_statistics(dataset)
