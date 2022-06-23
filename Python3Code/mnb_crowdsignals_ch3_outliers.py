@@ -18,9 +18,9 @@ from pathlib import Path
 import argparse
 
 # Set up file names and locations.
-DATA_PATH = Path('./mnb_intermediate_datafiles/')
-DATASET_FNAME = 'mnb_chapter2_result.csv'
-RESULT_FNAME = 'mnb_chapter3_result_outliers.csv'
+DATA_PATH = Path('./mnb_final_datafiles/')
+DATASET_FNAME = 'mnb_chapter2_result_500.csv'
+RESULT_FNAME = 'mnb_chapter3_result_outliers_final.csv'
 
 def print_flags():
     """
@@ -50,7 +50,10 @@ def main():
     # Step 1: Let us see whether we have some outliers we would prefer to remove.
 
     # Determine the columns we want to experiment on.
-    outlier_columns = ['acc_phone_x']
+    outlier_columns = ['acc_phone_x','acc_phone_y','acc_phone_z',
+                       'gyr_phone_x','gyr_phone_y','gyr_phone_z',
+                       'mag_phone_x','mag_phone_y','mag_phone_z',
+                       'grav_phone_x','grav_phone_y','grav_phone_z','light_phone_lux']
     # Create the outlier classes.
     OutlierDistr = DistributionBasedOutlierDetection()
     OutlierDist = DistanceBasedOutlierDetection()
@@ -114,7 +117,7 @@ def main():
             dataset.loc[dataset[f'{col}_outlier'] == True, col] = np.nan
             del dataset[col + '_outlier']
 
-        dataset.to_csv(DATA_PATH / RESULT_FNAME)
+    dataset.to_csv(DATA_PATH / RESULT_FNAME)
 
 
 if __name__ == '__main__':
@@ -122,7 +125,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
 
-    parser.add_argument('--mode', type=str, default='final',
+    parser.add_argument('--mode', type=str, default='distance',
                         help="Select what version to run: LOF, distance, mixture, chauvenet or final \
                         'LOF' applies the Local Outlier Factor to a single variable \
                         'distance' applies a distance based outlier detection method to a single variable \
