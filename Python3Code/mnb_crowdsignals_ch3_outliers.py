@@ -18,8 +18,8 @@ from pathlib import Path
 import argparse
 
 # Set up file names and locations.
-DATA_PATH = Path('./mnb_final_datafiles/')
-DATASET_FNAME = 'mnb_chapter2_result_500.csv'
+DATA_PATH = Path('./mnb_intermediate_datafiles/')
+DATASET_FNAME = 'mnb_chapter2_result.csv'
 RESULT_FNAME = 'mnb_chapter3_result_outliers_final.csv'
 
 def print_flags():

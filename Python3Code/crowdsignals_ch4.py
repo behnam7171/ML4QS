@@ -22,7 +22,7 @@ from Chapter4.TextAbstraction import TextAbstraction
 
 # Read the result from the previous chapter, and make sure the index is of the type datetime.
 DATA_PATH = Path('./mnb_intermediate_datafiles/')
-DATASET_FNAME = 'mnb_chapter3_result_final.csv'
+DATASET_FNAME = 'mnb_chapter3_imputation_result_final.csv'
 RESULT_FNAME = 'mnb_chapter4_result.csv'
 
 def print_flags():
@@ -92,28 +92,30 @@ def main():
   
     if FLAGS.mode == 'final':
 
-        ws = int(float(0.5*60000)/milliseconds_per_instance)
+        ws = int(float(0.5*20000)/milliseconds_per_instance)
         fs = float(1000)/milliseconds_per_instance
 
         selected_predictor_cols = [c for c in dataset.columns if not 'label' in c]
 
-        dataset = NumAbs.abstract_numerical(dataset, selected_predictor_cols, ws, 'mean')
-        dataset = NumAbs.abstract_numerical(dataset, selected_predictor_cols, ws, 'std')
+        #dataset = NumAbs.abstract_numerical(dataset, selected_predictor_cols, ws, 'mean')
+        #dataset = NumAbs.abstract_numerical(dataset, selected_predictor_cols, ws, 'std')
+        dataset = FreqAbs.abstract_frequency(dataset, selected_predictor_cols, ws, fs)
         # TODO: Add your own aggregation methods here
         
-        DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'light_phone_lux', 'mag_phone_x', 'pca_1', 'label'],
-                            ['like', 'like', 'like', 'like', 'like','like'],
-                             ['line', 'line','line', 'line', 'line', 'points'])
+        DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'grav_phone_x', 'light_phone_lux', 'mag_phone_x', 'pca_1', 'label'],
+                            ['like', 'like', 'like', 'like', 'like', 'like','like'],
+                             ['line', 'line','line', 'line', 'line', 'line', 'points'])
 
         #DataViz.plot_dataset(dataset, ['acc_phone_x','label'],['like','like'],['line','line'])
      
         CatAbs = CategoricalAbstraction()
         
-        dataset = CatAbs.abstract_categorical(dataset, ['label'], ['like'], 0.03, int(float(5*60000)/milliseconds_per_instance), 2)
+        dataset = CatAbs.abstract_categorical(dataset, ['label'], ['like'], 0.03, int(float(5*20000)/milliseconds_per_instance), 2)
 
 
         periodic_predictor_cols = ['acc_phone_x','acc_phone_y','acc_phone_z','gyr_phone_x','gyr_phone_y',
-                                'gyr_phone_z','mag_phone_x','mag_phone_y','mag_phone_z']
+                                'gyr_phone_z','mag_phone_x','mag_phone_y','mag_phone_z', 'grav_phone_x',
+                                   'grav_phone_y','grav_phone_z']
 
 
         
@@ -130,9 +132,9 @@ def main():
 
         dataset.to_csv(DATA_PATH / RESULT_FNAME)
 
-        DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x', 'light_phone_lux', 'mag_phone_x', 'pca_1', 'label'],
-                             ['like', 'like', 'like', 'like', 'like','like'],
-                             ['line', 'line', 'line', 'line', 'line', 'points'])
+        DataViz.plot_dataset(dataset, ['acc_phone_x', 'gyr_phone_x','grav_phone_x', 'light_phone_lux', 'mag_phone_x', 'pca_1', 'label'],
+                             ['like', 'like', 'like', 'like', 'like', 'like','like'],
+                             ['line', 'line', 'line', 'line', 'line', 'line', 'points'])
         #DataViz.plot_dataset(dataset, ['acc_phone_x','label'],['like','like'],['line','points'])
 
         print("--- %s seconds ---" % (time.time() - start_time))

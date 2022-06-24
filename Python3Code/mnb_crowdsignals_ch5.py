@@ -54,7 +54,7 @@ def main():
         for k in k_values:
             print(f'k = {k}')
             dataset_cluster = clusteringNH.k_means_over_instances(copy.deepcopy(
-                dataset), ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], k, 'default', 20, 10)
+                dataset), ['gyr_phone_x', 'gyr_phone_y', 'gyr_phone_z'], k, 'default', 20, 10)
             silhouette_score = dataset_cluster['silhouette'].mean()
             print(f'silhouette = {silhouette_score}')
             silhouette_values.append(silhouette_score)
@@ -137,11 +137,11 @@ def main():
         # And we select the outcome dataset of the knn clustering....
         clusteringNH = NonHierarchicalClustering()
 
-        dataset = clusteringNH.k_means_over_instances(dataset, ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], FLAGS.k, 'default', 50, 50)
-        DataViz.plot_clusters_3d(dataset, ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], 'cluster', ['label'])
+        dataset = clusteringNH.k_means_over_instances(dataset, ['mag_phone_x', 'mag_phone_y', 'mag_phone_z'], FLAGS.k, 'default', 50, 50)
+        DataViz.plot_clusters_3d(dataset, ['mag_phone_x', 'mag_phone_y', 'mag_phone_z'], 'cluster', ['label'])
         DataViz.plot_silhouette(dataset, 'cluster', 'silhouette')
         util.print_latex_statistics_clusters(
-            dataset, 'cluster', ['acc_phone_x', 'acc_phone_y', 'acc_phone_z'], 'label')
+            dataset, 'cluster', ['mag_phone_x', 'mag_phone_y', 'mag_phone_z'], 'label')
         del dataset['silhouette']
 
         dataset.to_csv(DATA_PATH / RESULT_FNAME)
@@ -157,7 +157,7 @@ if __name__ == '__main__':
                         'agglomerative' to study the effect of agglomerative clustering on a selection of variables  \
                         'final' kmeans with an optimal level of k is used for the next chapter", choices=['kmeans', 'kmediods', 'agglomerative', 'final'])
 
-    parser.add_argument('--k', type=int, default=6,
+    parser.add_argument('--k', type=int, default=7,
                         help="The selected k number of means used in 'final' mode of this chapter' \
                         ")
 

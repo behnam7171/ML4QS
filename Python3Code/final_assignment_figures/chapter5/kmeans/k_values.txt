@@ -1,0 +1,30 @@
+k = 2
+silhouette = 0.7437800507976199
+k = 3
+silhouette = 0.7522868270035935
+k = 4
+silhouette = 0.7587878434179753
+k = 5
+silhouette = 0.7417538736115444
+k = 6
+silhouette = 0.6488915367610455
+k = 7
+silhouette = 0.6377203864122186
+k = 8
+silhouette = 0.6484629365171074
+k = 9
+silhouette = 0.638883294643776
+
+Highest K-Means silhouette score: k = 4
+
+\multirow{2}{*}{ acc_phone_x } & mean  &  0.05 &  7.52 &  1.91 &  2.66\\
+ & std  &  0.70 &  2.47 &  2.47 &  2.52\\
+\multirow{2}{*}{ acc_phone_y } & mean  &  -0.11 &  0.06 &  -9.35 &  5.58\\
+ & std  &  0.70 &  2.59 &  3.77 &  2.48\\
+\multirow{2}{*}{ acc_phone_z } & mean  &  0.07 &  1.97 &  -0.62 &  3.46\\
+ & std  &  0.79 &  1.66 &  1.40 &  1.24\\
+labelRowing  & percentage  &  100.00 \% &  0.00 \% &  0.00 \% &  0.00 \%\\
+labelSitting  & percentage  &  100.00 \% &  0.00 \% &  0.00 \% &  0.00 \%\\
+labelCycling  & percentage  &  100.00 \% &  0.00 \% &  0.00 \% &  0.00 \%\\
+labelStanding  & percentage  &  98.39 \% &  1.12 \% &  0.48 \% &  0.00 \%\\
+labelRunning  & percentage  &  29.56 \% &  26.77 \% &  23.48 \% &  20.20 \%\\

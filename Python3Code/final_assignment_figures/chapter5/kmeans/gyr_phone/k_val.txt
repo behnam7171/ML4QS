@@ -1,0 +1,32 @@
+===== kmeans clustering =====
+k = 2
+silhouette = 0.7011976897419334
+k = 3
+silhouette = 0.6975550940007871
+k = 4
+silhouette = 0.44698492188763533
+k = 5
+silhouette = 0.4462251100254428
+k = 6
+silhouette = 0.46227290501254586
+k = 7
+silhouette = 0.4603354814628629
+k = 8
+silhouette = 0.4691198469657607
+k = 9
+silhouette = 0.4729036021341506
+
+Highest K-Means silhouette score: k = 2
+
+
+\multirow{2}{*}{ gyr_phone_x } & mean  &  -0.05 &  1.04\\
+ & std  &  0.35 &  0.63\\
+\multirow{2}{*}{ gyr_phone_y } & mean  &  0.00 &  0.77\\
+ & std  &  0.31 &  0.54\\
+\multirow{2}{*}{ gyr_phone_z } & mean  &  0.10 &  -1.59\\
+ & std  &  0.48 &  0.69\\
+labelRowing  & percentage  &  100.00 \% &  0.00 \%\\
+labelSitting  & percentage  &  100.00 \% &  0.00 \%\\
+labelCycling  & percentage  &  99.55 \% &  0.45 \%\\
+labelStanding  & percentage  &  98.07 \% &  1.93 \%\\
+labelRunning  & percentage  &  74.71 \% &  25.29 \%\\
